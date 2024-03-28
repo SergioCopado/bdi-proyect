@@ -1,0 +1,70 @@
+version: '3'
+
+services:
+  mysql-server-1:
+    env_file:
+      - mysql-server.env
+    image: mysql/mysql-server:8.0.32
+    command: ["mysqld", "--server_id=1", "--master_info_repository=TABLE","--relay_log_info_repository=TABLE"]
+  mysql-server-2:
+    env_file:
+      - mysql-server.env
+    image: mysql/mysql-server:8.0.32
+    command: ["mysqld", "--server_id=2", "--master_info_repository=TABLE","--relay_log_info_repository=TABLE"]
+  mysql-server-3:
+    env_file:
+      - mysql-server.env
+    image: mysql/mysql-server:8.0.32
+    command: ["mysqld", "--server_id=3", "--master_info_repository=TABLE","--relay_log_info_repository=TABLE"]
+  mysql-server-4:
+    env_file:
+      - mysql-server.env
+    image: mysql/mysql-server:8.0.32
+    command: ["mysqld", "--server_id=4", "--master_info_repository=TABLE","--relay_log_info_repository=TABLE"]
+  mysql-server-5:
+    env_file:
+      - mysql-server.env
+    image: mysql/mysql-server:8.0.32
+    command: ["mysqld", "--server_id=5", "--master_info_repository=TABLE","--relay_log_info_repository=TABLE"]
+
+  mysql-shell:
+    env_file:
+      - mysql-shell.env
+    image: neumayer/mysql-shell-batch
+    volumes:
+        - ./scripts/:/scripts/
+    depends_on:
+      - mysql-server-1
+      - mysql-server-2
+      - mysql-server-3
+      - mysql-server-4
+      - mysql-server-5
+      - mysql-router
+  mysql-router:
+    env_file:
+      - mysql-router.env
+    image: mysql/mysql-router:8.0.32
+    ports:
+      - "6446:6446"
+    depends_on:
+      - mysql-server-1
+      - mysql-server-2
+      - mysql-server-3
+      - mysql-server-4
+      - mysql-server-5
+    restart: on-failure
+
+  
+  mysql-extractor:
+    build: 
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - ./scripts:/app/scripts
+    depends_on:
+      - mysql-server-1
+      - mysql-server-2
+      - mysql-server-3
+      - mysql-server-4
+      - mysql-server-5
+      - mysql-router
