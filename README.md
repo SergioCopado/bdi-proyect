@@ -31,24 +31,24 @@ En cuanto al volumen utilizado, donde se guardarán los archivos JSON generados 
 
 **Datos:**
 
-•	Disponibilidad
+•	Disponibilidad:
 Para garantizar la disponibilidad de los datos, se pueden crear réplicas del volumen en varios nodos del clúster, de forma que los datos estén disponibles, aunque alguno de los nodos falle. Esto hay que mirarlo porque habría que implementarlo.
 
-•	Escalabilidad
+•	Escalabilidad:
 En la aplicación, se ha limitado la descarga de los datos a 4 géneros literarios por tiempo de ejecución, sin embargo, se pueden ampliar los géneros obteniendo un mayor número de archivos. Algunos ejemplos de esto son romance, fantasy….
 
 **Calidad:**
 
-•	Eficiencia
+•	Eficiencia:
 Utilizar un volumen Docker es eficiente en términos de recursos, ya que permite que los datos persistan más allá de la vida del contenedor sin necesidad de replicar el almacenamiento dentro de cada contenedor. Esto reduce la sobrecarga de almacenamiento y el consumo de recursos en comparación con el almacenamiento en el sistema de archivos del contenedor. 
 
-•	Escalabilidad
+•	Escalabilidad:
 La elección de un volumen de Docker como almacenamiento facilita la escalabilidad horizontal, ya que los datos almacenados en el volumen pueden ser accesibles para múltiples contenedores. Esto permite que se escale fácilmente agregando más contenedores que acceden a un mismo volumen. 
 
-•	Fiabilidad
+•	Fiabilidad:
 El uso de estrategias de respaldo y restauración para el volumen mejora la fiabilidad del sistema al garantizar que los datos estén protegidos contra pérdidas o corrupción. ***Investigar si se implementa o Docker lo tiene por defecto.***
 
-•	Gestión de carga
+•	Gestión de carga:
 Distribuir la carga de trabajo entre múltiples contenedores que utilizan el mismo volumen de Docker ayuda a equilibrar la carga y evitar la congestión en un solo nodo. Esto mejora la gestión de la carga y garantiza un rendimiento óptimo de la aplicación, especialmente en entornos de alta demanda.
 ***Investigar cómo implementarlo y si es necesario.***
 
