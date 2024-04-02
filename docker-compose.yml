@@ -5,7 +5,7 @@ services:
     image: extractor
     container_name: extractor-container
     volumes:
-      - /home/paulo/carla/Práctica_1_IBD/json:/json
+      - {ruta donde se quieran descargar los archivos}/json:/json
     #deploy:
     #  replicas: 3  # Garantiza la disponibilidad de los datos, si falla un nodo los demás seguirán funcionando
 
