@@ -3,31 +3,18 @@ The first proyect of the Big Data Infrastructure subject
 
 # Practice 1: Container-based Infrastructure
 
-1. **Detailed Description** of the infrastructure, justifying its design.
-
-    * Identify and describe the key components of the infrastructure, including the container services to be used.
-
-        - Data Extraction: A Docker container will be used to act as a data extractor. This container will obtain TXT files from the specified source. It will be a script or application that downloads or copies TXT files from the source and stores them locally in the container's file system.
-
-        - Storage System: We can utilize a simple storage system to store the raw files. It can be a local file system within the container or a shared volume mounted in the container.
-
-    * Explain how each component contributes to efficient data management and how they integrate with each other.
-
-2. Brief **guide** to facilitate deployment in any environment.
-
-
-
-INFORMACIÓN RECOPILADA:
-
 **Uso de la API:** 
 Se trata de una API que permite extraer información de libros de distintos géneros literarios. Se descargan archivos JSON que contienen distintas características de cada libro como el título, el autor, una descripción, el año de publicación o las plataformas de compra en las que se pueden obtener.
 Almacenamiento: Se almacenarán los datos dentro de un volumen creado en un contenedor de Docker.
 
-**Infraestructura:**
+**INFRAESTRUCTURA:**
 
-Para la infraestructura se utilizarán los conocimientos sobre contenedores y volúmenes de Docker implementados en clase. 
-Docker contiene y ejecuta la aplicación creada en un entorno aislado y portable, permite empaquetar la aplicación y todas sus dependencias en un contenedor ligero de forma que se garantice la portabilidad en cualquier entorno en el que Docker esté instalado. Además, cada contenedor tiene un entorno aislado propio, lo que garantiza que su funcionamiento no afectará a otras aplicaciones que se ejecuten en el mismo sistema.
-En cuanto al volumen utilizado, donde se guardarán los archivos JSON generados por la aplicación, permite el acceso y persistencia de los datos más allá del tiempo de vida del contenedor. En nuestro caso de almacenamiento de datos en crudo, se almacenarán los datos en un volumen para garantizar su persistencia, ya que posteriormente se necesitará acceder a ellos para procesarlos. Además, el uso de volúmenes permite compartir datos entre diferentes contenedores, por ejemplo, si tenemos una aplicación que extrae los datos y otra que los procesa. 
+La infraestructura propuesta se basa en el uso de Docker, aprovechando los conocimientos sobre contenedores y volúmenes adquiridos en el aula. Esta plataforma se empleará para gestionar la aplicación y sus dependencias de forma eficiente.
+
+Docker proporciona un entorno aislado y portable para ejecutar la aplicación, lo que facilita su despliegue en diferentes entornos. La capacidad de empaquetar la aplicación y sus dependencias en contenedores ligeros asegura la portabilidad y consistencia del entorno de ejecución. Cada contenedor opera en un entorno aislado propio, asegurando que el rendimiento de la aplicación no se vea afectado por otras instancias en ejecución. Los archivos JSON generados por la aplicación (*data_extractor.py*) se almacenan en un volumen Docker, garantizando su persistencia incluso después de la detención de los contenedores. El uso de volúmenes también permite la compartición de datos entre contenedores distintos, lo que facilita la colaboración entre componentes de la aplicación, como la extracción y el procesamiento de datos.
+
+En cuanto a la configuración del despliegue en un entorno virtualizado, se establecerán los volúmenes necesarios para almacenar y persistir los archivos JSON generados por la aplicación. Los contenedores se configurarán de manera que interactúen eficientemente entre sí, facilitando así la extracción, procesamiento y almacenamiento de datos en crudo. 
+ 
 
 **Datos:**
 
