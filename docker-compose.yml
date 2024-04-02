@@ -3,11 +3,11 @@ version: '3'
 services:
   data:
     image: extractor
-    container_name: extractor-container
     volumes:
       - {ruta donde se quieran descargar los archivos}/json:/json
-    #deploy:
-    #  replicas: 3  # Garantiza la disponibilidad de los datos, si falla un nodo los demás seguirán funcionando
+    deploy:
+      mode: replicated
+      replicas: 3  # Garantiza la disponibilidad de los datos, si falla un nodo los demás seguirán funcionando
 
 volumes:
   data-volume:
