@@ -16,6 +16,7 @@ The first proyect of the Big Data Infrastructure subject
 2. Brief **guide** to facilitate deployment in any environment.
 
 
+
 INFORMACIÓN RECOPILADA:
 
 **Uso de la API:** 
@@ -29,6 +30,7 @@ Docker contiene y ejecuta la aplicación creada en un entorno aislado y portable
 En cuanto al volumen utilizado, donde se guardarán los archivos JSON generados por la aplicación, permite el acceso y persistencia de los datos más allá del tiempo de vida del contenedor. En nuestro caso de almacenamiento de datos en crudo, se almacenarán los datos en un volumen para garantizar su persistencia, ya que posteriormente se necesitará acceder a ellos para procesarlos. Además, el uso de volúmenes permite compartir datos entre diferentes contenedores, por ejemplo, si tenemos una aplicación que extrae los datos y otra que los procesa. 
 
 **Datos:**
+
 •	Disponibilidad
 Para garantizar la disponibilidad de los datos, se pueden crear réplicas del volumen en varios nodos del clúster, de forma que los datos estén disponibles, aunque alguno de los nodos falle. Esto hay que mirarlo porque habría que implementarlo.
 
