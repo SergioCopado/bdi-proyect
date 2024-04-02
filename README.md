@@ -23,6 +23,7 @@ Se trata de una API que permite extraer información de libros de distintos gén
 Almacenamiento: Se almacenarán los datos dentro de un volumen creado en un contenedor de Docker.
 
 **Infraestructura:**
+
 Para la infraestructura se utilizarán los conocimientos sobre contenedores y volúmenes de Docker implementados en clase. 
 Docker contiene y ejecuta la aplicación creada en un entorno aislado y portable, permite empaquetar la aplicación y todas sus dependencias en un contenedor ligero de forma que se garantice la portabilidad en cualquier entorno en el que Docker esté instalado. Además, cada contenedor tiene un entorno aislado propio, lo que garantiza que su funcionamiento no afectará a otras aplicaciones que se ejecuten en el mismo sistema.
 En cuanto al volumen utilizado, donde se guardarán los archivos JSON generados por la aplicación, permite el acceso y persistencia de los datos más allá del tiempo de vida del contenedor. En nuestro caso de almacenamiento de datos en crudo, se almacenarán los datos en un volumen para garantizar su persistencia, ya que posteriormente se necesitará acceder a ellos para procesarlos. Además, el uso de volúmenes permite compartir datos entre diferentes contenedores, por ejemplo, si tenemos una aplicación que extrae los datos y otra que los procesa. 
@@ -51,6 +52,7 @@ Distribuir la carga de trabajo entre múltiples contenedores que utilizan el mis
 •	Buscar más
 
 **Alcance:**
+
 Al utilizar un volumen Docker como forma de almacenamiento de datos, puede haber ciertas limitaciones en algunas dimensiones de Big Data. 
 En primer lugar, el volumen Docker puede no ser una solución óptima en cuestiones de volúmenes de datos muy elevados. Los volúmenes de Docker están limitados por el espacio de almacenamiento disponible en el sistema de archivos del host.
 En segundo lugar, la velocidad podría verse afectada en cierto modo ya que, aunque el volumen de Docker es conocido por su eficiencia y baja sobrecarga, puede introducir una cierta latencia en el acceso a los datos.
