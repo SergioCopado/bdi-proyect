@@ -1,6 +1,8 @@
 # IBD - Práctica 1
 Primera práctica de la asignatura de Infraestructuras de Big Data
 
+
+
 **USO DE LA API:** 
 
 Se trata de una API diseñada para extraer información de libros de diversos géneros literarios (*https://openlibrary.org/*). Esta API descarga archivos JSON que contienen información detallada de cada libro, como su título, autor, descripción, año de publicación y plataformas de compra disponibles.
