@@ -17,6 +17,7 @@ The first proyect of the Big Data Infrastructure subject
 
 
 INFORMACIÓN RECOPILADA:
+
 **Uso de la API:** 
 Se trata de una API que permite extraer información de libros de distintos géneros literarios. Se descargan archivos JSON que contienen distintas características de cada libro como el título, el autor, una descripción, el año de publicación o las plataformas de compra en las que se pueden obtener.
 Almacenamiento: Se almacenarán los datos dentro de un volumen creado en un contenedor de Docker.
