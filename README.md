@@ -36,6 +36,7 @@ Para garantizar la disponibilidad de los datos, se pueden crear réplicas del vo
 En la aplicación, se ha limitado la descarga de los datos a 4 géneros literarios por tiempo de ejecución, sin embargo, se pueden ampliar los géneros obteniendo un mayor número de archivos. Algunos ejemplos de esto son romance, fantasy….
 
 **Calidad:**
+
 •	Eficiencia
 Utilizar un volumen Docker es eficiente en términos de recursos, ya que permite que los datos persistan más allá de la vida del contenedor sin necesidad de replicar el almacenamiento dentro de cada contenedor. Esto reduce la sobrecarga de almacenamiento y el consumo de recursos en comparación con el almacenamiento en el sistema de archivos del contenedor. 
 
