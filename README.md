@@ -19,37 +19,36 @@ En cuanto a la configuración del despliegue en un entorno virtualizado, se esta
 
 **DATOS**
 
-•	*Disponibilidad*:
-Se emplean copias del volumen en múltiples nodos del clúster para asegurar la disponibilidad de los datos. De esta forma, si uno de los nodos falla, los datos no se perderán y los demás seguirán funcionando de forma independiente. Para este propósito, el servicio se desplegará en un modo replicado con tres réplicas.
+La estrategia actual de ingesta de datos masivos se fundamenta en realizar solicitudes HTTP a una fuente externa (*Open Library*) para extraer datos. En cuanto al almacenamiento en crudo de datos, la solución actual emplea volúmenes Docker para almacenar los archivos JSON generados por la aplicación. 
 
-•	*Escalabilidad*:
-En la aplicación, se ha limitado la descarga de los datos a 4 géneros literarios por tiempo de ejecución, sin embargo, se pueden ampliar los géneros obteniendo un mayor número de archivos. Algunos ejemplos de esto son romance, fantasy, mystery….
+En lo que respecta a la garantía de disponibilidad y escalabilidad de los datos: 
+
+•	*Disponibilidad:* se implementan copias del volumen en diversos nodos del clúster para asegurar la continuidad de los datos en caso de fallo de un nodo o contenedor. Esto garantiza que si un nodo experimenta un fallo, los datos permanecerán intactos y las demás instancias continuarán funcionando de manera independiente.
+
+•	*Escalabilidad:* se alcanza aumentando el número de réplicas o añadiendo nuevos nodos al clúster. Aunque la aplicación se limite a la descarga de datos de cuatro géneros literarios por tiempo de ejecución, es posible ampliar la variedad de géneros obteniendo un mayor número de archivos.
 
 **CALIDAD**
 
-•	*Eficiencia*:
-Utilizar un volumen Docker es eficiente en términos de recursos, ya que permite que los datos persistan más allá de la vida del contenedor sin necesidad de replicar el almacenamiento dentro de cada contenedor. Esto reduce la sobrecarga de almacenamiento y el consumo de recursos en comparación con el almacenamiento en el sistema de archivos del contenedor. 
+El empleo de volúmenes Docker conlleva una serie de ventajas en diferentes aspectos:
 
-•	*Escalabilidad*:
-La elección de un volumen de Docker como almacenamiento facilita la escalabilidad horizontal, ya que los datos almacenados en el volumen pueden ser accesibles para múltiples contenedores. Esto facilita el escalado horizontal de la aplicación, ya que se pueden añadir contenedores que utilicen el mismo volumen si fuera necesario por el volumen de datos manejados. 
+•	*Eficiencia*: utilizar un volumen Docker es eficiente en términos de recursos, ya que permite que los datos persistan más allá de la vida del contenedor sin necesidad de replicar el almacenamiento dentro de cada contenedor. Esto reduce la sobrecarga de almacenamiento y el consumo de recursos en comparación con el almacenamiento en el sistema de archivos del contenedor. 
 
-•	*Fiabilidad*:
-El uso de estrategias de respaldo y restauración para el volumen mejora la fiabilidad del sistema al garantizar que los datos estén protegidos contra pérdidas o corrupción. ***Investigar si se implementa o Docker lo tiene por defecto.*** 
-Docker no incluye una solución integrada por defecto para realizar respaldo y restauración, sin embargo, ofrece al usuario diversas alternativas para respaldar y restaurar datos almacenados en volúmenes. Una opción viable son las Docker Volume Backup Tools ***(Investigar las Docker Volume Backup Tools)*** , herramientas diseñadas específicamente con el propósito de realizar respaldos y restauraciones de datos almacenados en volúmenes de Docker. Estas herramientas posibilitan a los usuarios la creación de copias de seguridad de datos persistentes dentro de los contenedores Docker y, en caso necesario, la restauración de dichos datos en un momento posterior.
+•	*Escalabilidad*: la elección de un volumen Docker como almacenamiento facilita la escalabilidad horizontal, puesto que los datos almacenados en el volumen pueden ser accesibles para múltiples contenedores. Esto facilita el escalado horizontal de la aplicación, ya que se pueden añadir contenedores que utilicen el mismo volumen si fuera necesario por el volumen de datos manejados. 
 
-•	*Gestión de carga*:
-Distribuir la carga de trabajo entre múltiples contenedores que utilizan el mismo volumen de Docker ayuda a equilibrar la carga y evitar la congestión en un solo nodo. Esto mejora la gestión de la carga y garantiza un rendimiento óptimo de la aplicación, especialmente en entornos de alta demanda.
+•	*Fiabilidad*: implementar estrategias de respaldo y restauración para el volumen mejora la fiabilidad del sistema, asegurando la protección de los datos contra pérdidas o corrupción. Aunque Docker no proporciona una solución integrada por defecto para estas tareas, ofrece al usuario varias alternativas. Una opción viable son las Docker Volume Backup Tools, diseñadas específicamente para realizar respaldos y restauraciones de datos almacenados en volúmenes de Docker. Estas herramientas permiten a los usuarios crear copias de seguridad de datos persistentes dentro de los contenedores Docker y restaurarlos según sea necesario.
 
-•	Buscar más
+•	*Gestión de carga*: distribuir la carga de trabajo entre múltiples contenedores que utilizan el mismo volumen Docker ayuda a equilibrar la carga y evitar la congestión en un solo nodo. Esto mejora la gestión de la carga y garantiza un rendimiento óptimo de la aplicación, especialmente en entornos de alta demanda.
+
 
 **ALCANCE**
 
-Al utilizar un volumen Docker como forma de almacenamiento de datos, puede haber ciertas limitaciones en algunas dimensiones de Big Data. 
+La implementación de esta arquitectura conlleva la renuncia a ciertos aspectos del Big Data.
 
-En primer lugar, el volumen Docker puede no ser una solución óptima en cuestiones de volúmenes de datos muy elevados. Los volúmenes de Docker están limitados por el espacio de almacenamiento disponible en el sistema de archivos del host.
-En segundo lugar, la velocidad podría verse afectada en cierto modo ya que, aunque el volumen de Docker es conocido por su eficiencia y baja sobrecarga, puede introducir una cierta latencia en el acceso a los datos. Es decir, al acceder a los datos almacenados en un volumen de Docker, puede haber una pequeña demora adicional en comparación con el acceso a los datos directamente desde el sistema de archivos del host.
+En primer lugar, los volúmenes Docker pueden no ser la solución más idónea para manejar grandes volúmenes de datos, ya que su capacidad está restringida por el espacio disponible en el sistema de archivos del host.
 
-A pesar de sacrificar el volumen y la velocidad de los datos, esto simplifica la implementación de la infraestructura en varios aspectos. Uno de ellos es la facilidad de configuración y gestión, la implementación de los volúmenes de Docker es sencilla comparado con otras soluciones más complejas. También proporciona compatibilidad y portabilidad, Docker es compatible con múltiples entornos y un volumen de Docker asegura la portabilidad de la aplicación facilitando su despliegue en diferentes entornos sin necesidad de realizar grandes cambios en la configuración. Por último, conlleva una menor sobrecarga de recursos, los volúmenes de Docker introducen una sobrecarga mínima priorizando la eficiencia y la optimización de recursos. 
+Además, la velocidad de acceso a los datos puede verse afectada, pues aunque los volúmenes Docker son conocidos por su eficiencia y baja sobrecarga, pueden introducir cierta latencia en el acceso a los datos. Esto significa que puede haber una pequeña demora adicional al acceder a los datos almacenados en un volumen de Docker en comparación con el acceso directo desde el sistema de archivos del host.
+
+A pesar de estas limitaciones en términos de volumen y velocidad de los datos, la elección de utilizar volúmenes Docker simplifica la implementación de la infraestructura en varios aspectos. Por un lado, ofrece facilidad en la configuración y gestión, siendo su implementación más sencilla en comparación con otras soluciones más complejas. Además, proporciona compatibilidad y portabilidad, ya que Docker es compatible con múltiples entornos, y un volumen Docker garantiza la portabilidad de la aplicación, facilitando su despliegue en diferentes entornos sin necesidad de realizar cambios significativos en la configuración. Por último, implica una menor sobrecarga de recursos, ya que los volúmenes Docker introducen una sobrecarga mínima, priorizando la eficiencia y la optimización de recursos.
 
 ## Guía de Despliegue para la Infraestructura
 
@@ -60,13 +59,13 @@ Esta guía proporciona los pasos necesarios para desplegar la infraestructura de
 1. **Descargar el repositorio de GitHub y asegurarse de que todos los archivos se encuentran en la misma carpeta:**
    
 2. **Abrir la Terminal:**
-   Abra la terminal o línea de comandos en el sistema operativo correspondiente. Acceda en la terminal a la carpeta donde se    han guardado los documentos descargados.
+   Abra la terminal o línea de comandos en el sistema operativo correspondiente. Acceda en la terminal a la carpeta donde se han guardado los documentos descargados.
 
 3. **Modificar el Archivo Docker Compose:**
-   Modifique el archivo `docker-compose.yml`, proporcionando la ruta en el sistema de archivos local donde desea que Docker     monte el volumen `/json` del contenedor. Esto se puede realizar utilizando un editor de texto o una herramienta de línea     de comandos.
+   Modifique el archivo `docker-compose.yml`, proporcionando la ruta en el sistema de archivos local donde desea que Docker monte el volumen `/json` del contenedor. Esto se puede realizar utilizando un editor de texto o una herramienta de línea de comandos.
 
 4. **Construir la Imagen Docker:**  
-   Ejecute el siguiente comando para construir la imagen Docker basada en el Dockerfile proporcionado, donde *extractor* es     el nombre de la imagen que se creará:
+   Ejecute el siguiente comando para construir la imagen Docker basada en el Dockerfile proporcionado, donde *extractor* es el nombre de la imagen que se creará:
 
    ```bash
    docker build -t extractor .
@@ -79,6 +78,6 @@ Esta guía proporciona los pasos necesarios para desplegar la infraestructura de
    docker compose up
    ```
 
-Con estos pasos, se ha desplegado con éxito la infraestructura de la aplicación, ya está lista para comenzar a utilizarla. Para comprobar que ha funcionado correctamente, acceda al directorio especificado para crear la carpeta `/json` y verifique que se encuentran los archivos JSON con la información de los libros descargados.
+Con estos pasos, se ha desplegado con éxito la infraestructura de la aplicación; ya está lista para comenzar a utilizarla. Para comprobar que ha funcionado correctamente, acceda al directorio especificado para crear la carpeta `/json` y verifique que se encuentran los archivos JSON con la información de los libros descargados.
 
 
