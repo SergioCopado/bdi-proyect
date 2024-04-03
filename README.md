@@ -79,6 +79,6 @@ Esta guía proporciona los pasos necesarios para desplegar la infraestructura de
    docker compose up
    ```
 
-Con estos pasos, se ha desplegado con éxito la infraestructura de la aplicación, ya está lista para comenzar a utilizarla. Para comprobar que ha funcionado correctamente, acceda al directorio especificado para crear la carpeta `json` y verifique que se encuentran los archivos JSON con la información de los libros descargados.
+Con estos pasos, se ha desplegado con éxito la infraestructura de la aplicación, ya está lista para comenzar a utilizarla. Para comprobar que ha funcionado correctamente, acceda al directorio especificado para crear la carpeta `/json` y verifique que se encuentran los archivos JSON con la información de los libros descargados.
 
 
