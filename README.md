@@ -17,7 +17,7 @@ Docker proporciona un entorno aislado y portable para ejecutar la aplicación, l
 En cuanto a la configuración del despliegue en un entorno virtualizado, se establecerán los volúmenes necesarios para almacenar y persistir los archivos JSON generados por la aplicación. Los contenedores se configurarán de manera que interactúen eficientemente entre sí, facilitando así la extracción, procesamiento y almacenamiento de datos en crudo. 
  
 
-**Datos:**
+**DATOS**
 
 •	*Disponibilidad*:
 Se emplean copias del volumen en múltiples nodos del clúster para asegurar la disponibilidad de los datos. De esta forma, si uno de los nodos falla, los datos no se perderán y los demás seguirán funcionando de forma independiente. Para este propósito, el servicio se desplegará en un modo replicado con tres réplicas.
@@ -25,7 +25,7 @@ Se emplean copias del volumen en múltiples nodos del clúster para asegurar la 
 •	*Escalabilidad*:
 En la aplicación, se ha limitado la descarga de los datos a 4 géneros literarios por tiempo de ejecución, sin embargo, se pueden ampliar los géneros obteniendo un mayor número de archivos. Algunos ejemplos de esto son romance, fantasy, mystery….
 
-**Calidad:**
+**CALIDAD**
 
 •	*Eficiencia*:
 Utilizar un volumen Docker es eficiente en términos de recursos, ya que permite que los datos persistan más allá de la vida del contenedor sin necesidad de replicar el almacenamiento dentro de cada contenedor. Esto reduce la sobrecarga de almacenamiento y el consumo de recursos en comparación con el almacenamiento en el sistema de archivos del contenedor. 
@@ -42,7 +42,7 @@ Distribuir la carga de trabajo entre múltiples contenedores que utilizan el mis
 
 •	Buscar más
 
-**Alcance:**
+**ALCANCE**
 
 Al utilizar un volumen Docker como forma de almacenamiento de datos, puede haber ciertas limitaciones en algunas dimensiones de Big Data. 
 
