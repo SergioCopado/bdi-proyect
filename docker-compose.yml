@@ -7,7 +7,7 @@ services:
       - ./json:/json
     deploy:
       mode: replicated
-      replicas: 3  # Garantiza la disponibilidad de los datos, si falla un nodo los demás seguirán funcionando
+      replicas: 3  
 
 volumes:
   data-volume:
