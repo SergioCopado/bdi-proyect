@@ -45,13 +45,13 @@ La implementación de esta arquitectura conlleva la renuncia a ciertos aspectos 
 
 • *Volumen*: los volúmenes Docker pueden no ser la solución más idónea para manejar grandes volúmenes de datos, ya que su capacidad está restringida por el espacio disponible en el sistema de archivos del host.
 
-• *Velocidad*: la velocidad de acceso a los datos puede verse afectada, pues aunque los volúmenes Docker son conocidos por su eficiencia y baja sobrecarga, pueden introducir cierta latencia en el acceso a los datos. Esto significa que puede haber una pequeña demora adicional al acceder a los datos almacenados en un volumen de Docker en comparación con el acceso directo desde el sistema de archivos del host.
+• *Velocidad*: la velocidad de acceso a los datos puede verse afectada; aunque los volúmenes Docker son conocidos por su eficiencia y baja sobrecarga, pueden introducir cierta latencia en el acceso a los datos. Esto significa que puede haber una pequeña demora adicional al acceder a los datos almacenados en un volumen de Docker en comparación con el acceso directo desde el sistema de archivos del host.
 
 • *Variedad*: la variedad se determina en función a los distintos tipos de datos guardados en los archivos JSON obtenidos. En esta aplicación, disponemos de diversas categorías dentro de cada archivo en las que encontramos datos de tipo string, de tipo int y de tipo booleano.
 
-• *Valor*: el valor de los datos radica en su capacidad para proporcionar información útil a los usuarios. En el caso de los archivos JSON descargados con la información de distintos libros, nos proporcionan información como las plataformas donde adquirirlos, los autores, el año de publicación o el género/s literarios al que pertenecen. 
+• *Valor*: el valor de los datos radica en su capacidad para proporcionar información útil a los usuarios. En el caso de los archivos JSON descargados con la información de distintos libros, estos proporcionan información como las plataformas donde adquirirlos, los autores, el año de publicación o el género/s literarios a los que pertenecen. 
 
-• *Veracidad*: ***No sé muy bien como justificar esto porque sin procesar los datos no sabemos si los archivos son correctos completamente.***
+• *Veracidad*: la veracidad de los datos puede verse comprometida debido a que, sin un procesamiento previo, no se puede garantizar la integridad y precisión de los archivos almacenados en los volúmenes Docker.
 
 A pesar de estas limitaciones en términos de volumen y velocidad de los datos, la elección de utilizar volúmenes Docker simplifica la implementación de la infraestructura en varios aspectos. Por un lado, ofrece facilidad en la configuración y gestión, siendo su implementación más sencilla en comparación con otras soluciones más complejas. Además, proporciona compatibilidad y portabilidad, ya que Docker es compatible con múltiples entornos, y un volumen Docker garantiza la portabilidad de la aplicación, facilitando su despliegue en diferentes entornos sin necesidad de realizar cambios significativos en la configuración. Por último, implica una menor sobrecarga de recursos, ya que los volúmenes Docker introducen una sobrecarga mínima, priorizando la eficiencia y la optimización de recursos.
 
