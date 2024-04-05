@@ -3,6 +3,8 @@ Grupo 4 - Carla Barbero, Sergio Copado, Rocío Frontaura y Elia González de Her
 
 ## Descripción detallada de la infraestructura
 
+En primer lugar, se usará una API para la obtención de datos.
+
 **USO DE LA API:** 
 
 Se trata de una API diseñada para extraer información de libros de diversos géneros literarios (*https://openlibrary.org/*). Esta API descarga archivos JSON que contienen información detallada de cada libro, como su título, autor, descripción, año de publicación o plataformas de compra disponibles.
