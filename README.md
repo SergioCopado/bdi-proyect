@@ -45,7 +45,7 @@ El empleo de volúmenes Docker conlleva una serie de ventajas en diferentes aspe
 
 **ALCANCE**
 
-La implementación de esta arquitectura conlleva la renuncia de ciertos aspectos del Big Data.
+La implementación de esta arquitectura supone la renuncia de ciertos aspectos del Big Data, como son el volumen y la velocidad de los datos. A continuación, se detalla cómo influyen cada una de las cinco dimensiones en nuestra aplicación. 
 
 • *Volumen*: los volúmenes Docker pueden no ser la solución más idónea para manejar grandes volúmenes de datos, ya que su capacidad está restringida por el espacio disponible en el sistema de archivos del host.
 
@@ -55,7 +55,7 @@ La implementación de esta arquitectura conlleva la renuncia de ciertos aspectos
 
 • *Valor*: el valor de los datos radica en su capacidad para proporcionar información útil a los usuarios. En el caso de los archivos JSON descargados con la información de distintos libros, estos proporcionan información como las plataformas donde adquirirlos, los autores, el año de publicación o el género/s literarios a los que pertenecen. 
 
-• *Veracidad*: la veracidad de los datos puede verse comprometida debido a que, sin un procesamiento previo, no se puede garantizar la integridad y precisión de los archivos almacenados en los volúmenes Docker, a menos que se conozca la fuente de la que provienen y esta sea fiable y/o oficial, como es el caso. 
+• *Veracidad*: la veracidad de los datos puede verse comprometida debido a que, sin un procesamiento previo, no se puede garantizar la integridad y precisión de los archivos almacenados en los volúmenes Docker, a menos que se conozca la fuente de la que provienen y esta sea fiable y/o oficial. En nuestro caso, se trata de una fuente pública y gratuita utilizada por numerosos usuarios y que contiene información de diversos libros, por lo que hemos considerado que es una fuente fiable.
 
 A pesar de estas limitaciones en términos de volumen y velocidad de los datos, la elección de utilizar volúmenes Docker simplifica la implementación de la infraestructura en varios aspectos. Por un lado, ofrece facilidad en la configuración y gestión, siendo su implementación más sencilla en comparación con otras soluciones más complejas. Además, proporciona compatibilidad y portabilidad, ya que Docker es compatible con múltiples entornos, y un volumen Docker garantiza la portabilidad de la aplicación, facilitando su despliegue en diferentes entornos sin necesidad de realizar cambios significativos en la configuración. Por último, implica una menor sobrecarga de recursos, ya que los volúmenes Docker introducen una sobrecarga mínima, priorizando la eficiencia y la optimización de recursos.
 
