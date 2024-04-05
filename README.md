@@ -41,7 +41,7 @@ El empleo de volúmenes Docker conlleva una serie de ventajas en diferentes aspe
 
 **ALCANCE**
 
-La implementación de esta arquitectura conlleva la renuncia a ciertos aspectos del Big Data.
+La implementación de esta arquitectura conlleva la renuncia de ciertos aspectos del Big Data.
 
 • *Volumen*: los volúmenes Docker pueden no ser la solución más idónea para manejar grandes volúmenes de datos, ya que su capacidad está restringida por el espacio disponible en el sistema de archivos del host.
 
