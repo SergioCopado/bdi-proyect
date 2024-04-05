@@ -1,4 +1,5 @@
 # IBD - Práctica 1
+Grupo 4 - Carla Barbero, Sergio Copado, Rocío Frontaura y Elia González de Heredia
 
 ## Descripción detallada de la infraestructura
 
@@ -85,4 +86,4 @@ Esta guía proporciona los pasos necesarios para desplegar la infraestructura de
 
 Con estos pasos, se ha desplegado con éxito la infraestructura de la aplicación; ya está lista para comenzar a utilizarla. Para comprobar que ha funcionado correctamente, acceda al directorio especificado para crear la carpeta '/json' y verifique que se encuentran los archivos JSON con la información de los libros descargados.
 
-**NOTA:** El archivo ´data_extractor.py´ se ha limitado para que descargue json de un solo género literario (horror) para que el tiempo de ejecución al probarlo no sea elevado. Para descargar todos los datos, se pueden ampliar los géneros con otros que son science fiction, thriller y action. Este conjunto de géneros tarda aproximadamente 3h en realizar toda la descarga. Si se quisiera ampliar aún más el volumen de los datos de descarga hay otros géneros a añadir como romance, fantasy o mystery. 
+**NOTA:** El archivo 'data_extractor.py' se ha limitado para que descargue archivos JSON de un solo género literario (horror) para que el tiempo de ejecución al probarlo no sea elevado. Para descargar todos los datos, se pueden ampliar los géneros con otros como science fiction, thriller y action. Este conjunto de géneros se descarga aproximadamente en tres horas. Si se quisiera ampliar aún más el volumen de los datos de descarga, hay otros géneros a añadir como romance, fantasy o mystery. 
