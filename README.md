@@ -24,7 +24,7 @@ En lo que respecta a la garantía de disponibilidad y escalabilidad de los datos
 
 •	*Disponibilidad:* se implementan copias del volumen en diversos nodos del clúster para asegurar la continuidad de los datos en caso de fallo de un nodo o contenedor. Esto garantiza que si un nodo experimenta un fallo, los datos permanecerán intactos y las demás instancias continuarán funcionando de manera independiente.
 
-•	*Escalabilidad:* se alcanza aumentando el número de réplicas o añadiendo nuevos nodos al clúster. Aunque la aplicación se limite a la descarga de datos de cuatro géneros literarios por tiempo de ejecución, es posible ampliar la variedad de géneros obteniendo un mayor número de archivos. Algunos ejemplos de géneros literarios con los que se podría ampliar el número de archivos son romance o fantasy. 
+•	*Escalabilidad:* se alcanza aumentando el número de réplicas o añadiendo nuevos nodos al clúster. Aunque la aplicación se limite a la descarga de datos de cuatro géneros literarios por tiempo de ejecución, es posible ampliar la variedad de géneros obteniendo un mayor número de archivos. 
 
 **CALIDAD**
 
@@ -85,4 +85,4 @@ Esta guía proporciona los pasos necesarios para desplegar la infraestructura de
 
 Con estos pasos, se ha desplegado con éxito la infraestructura de la aplicación; ya está lista para comenzar a utilizarla. Para comprobar que ha funcionado correctamente, acceda al directorio especificado para crear la carpeta '/json' y verifique que se encuentran los archivos JSON con la información de los libros descargados.
 
-
+**NOTA:** El archivo ´data_extractor.py´ se ha limitado para que descargue json de un solo género literario (horror) para que el tiempo de ejecución al probarlo no sea elevado. Para descargar todos los datos, se pueden ampliar los géneros con otros que son science fiction, thriller y action. Este conjunto de géneros tarda aproximadamente 3h en realizar toda la descarga. Si se quisiera ampliar aún más el volumen de los datos de descarga hay otros géneros a añadir como romance, fantasy o mystery. 
