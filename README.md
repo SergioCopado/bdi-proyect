@@ -69,7 +69,7 @@ Esta guía proporciona los pasos necesarios para desplegar la infraestructura de
 2. **Abrir la Terminal:**
    Abra la terminal o línea de comandos en el sistema operativo correspondiente. Acceda en la terminal a la carpeta donde se han guardado los documentos descargados.
 
-3. **Construir la Imagen Docker:**  
+3. **Construir la Imagen Docker:**
    Ejecute el siguiente comando para construir la imagen Docker basada en el Dockerfile proporcionado, donde *extractor* es el nombre de la imagen que se creará:
 
    ```bash
