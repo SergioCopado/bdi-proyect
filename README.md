@@ -17,7 +17,8 @@ La infraestructura propuesta se basa en el uso de Docker, aprovechando los conoc
 Docker proporciona un entorno aislado y portable para ejecutar la aplicación, lo que facilita su despliegue en diferentes entornos. La capacidad de empaquetar la aplicación y sus dependencias en contenedores ligeros asegura la portabilidad y consistencia del entorno de ejecución. Cada contenedor opera en un entorno aislado propio, asegurando que el rendimiento de la aplicación no se vea afectado por otras instancias en ejecución. Los archivos JSON generados por la aplicación (*data_extractor.py*) se almacenan en un volumen Docker, garantizando su persistencia incluso después de la detención de los contenedores. El uso de volúmenes también permite la compartición de datos entre contenedores distintos, lo que facilita la colaboración entre componentes de la aplicación, como la extracción y el procesamiento de datos.
 
 En cuanto a la configuración del despliegue en un entorno virtualizado, se establecerán los volúmenes necesarios para almacenar y persistir los archivos JSON generados por la aplicación, estos se configurarán de manera que interactúen eficientemente entre sí, facilitando así la extracción y almacenamiento de datos en crudo. 
- 
+
+ A continuación se detalla como se han considerados los retos/requisitos para el manejo de Big Data.
 
 **DATOS**
 
