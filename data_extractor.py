@@ -62,6 +62,8 @@ def buscar_libros(parametros_busqueda):
     except requests.exceptions.RequestException as e:
         print(f"Error en la solicitud: {e}")
 
-# Ejemplo de uso con distintos géneros literarios
-parametros_busqueda = ['science fiction', 'action', 'thriller', 'horror']
+parametros_busqueda = ['horror']
 buscar_libros(parametros_busqueda)
+
+# OTROS GÉNEROS LITERARIOS
+# 'science fiction', 'action', 'thriller', 'fantasy', 'romance', 'mystery'
