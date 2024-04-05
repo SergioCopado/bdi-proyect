@@ -7,7 +7,7 @@ En primer lugar, se usará una API para la obtención de datos.
 
 **USO DE LA API:** 
 
-Se trata de una API diseñada para extraer información de libros de diversos géneros literarios (*https://openlibrary.org/*). Esta API descarga archivos JSON que contienen información detallada de cada libro, como su título, autor, descripción, año de publicación o plataformas de compra disponibles.
+Se trata de una API diseñada para extraer información de libros de diversos géneros literarios (*https://openlibrary.org/*). Esta API descarga archivos JSON que contienen información diversa y detallada de cada libro, como su título, autor, descripción, año de publicación o plataformas de compra disponibles.
 
 
 **INFRAESTRUCTURA:**
