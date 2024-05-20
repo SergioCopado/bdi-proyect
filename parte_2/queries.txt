@@ -1,1 +1,0 @@
-#Aquí se añaden las queries que haremos en elasticsearch 
