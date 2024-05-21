@@ -90,3 +90,35 @@ Esta guía proporciona los pasos necesarios para desplegar la infraestructura de
 Con estos pasos, se ha desplegado con éxito la infraestructura de la aplicación; ya está lista para comenzar a utilizarla. Para comprobar que ha funcionado correctamente, acceda al directorio especificado para crear la carpeta '/json' y verifique que se encuentran los archivos JSON con la información de los libros descargados.
 
 **NOTA:** El archivo 'data_extractor.py' se ha limitado para que descargue archivos JSON de un solo género literario (horror) para que el tiempo de ejecución al probarlo no sea elevado. Para descargar todos los datos, se pueden ampliar los géneros con otros como science fiction, thriller y action. Este conjunto de géneros se descarga aproximadamente en tres horas. Si se quisiera ampliar aún más el volumen de los datos de descarga, hay otros géneros a añadir como romance, fantasy o mystery. 
+
+## Nuevos pasos para el Despliegue
+
+### 1. Clonar el Repositorio
+Descargue el repositorio de GitHub y asegúrese de que todos los archivos se encuentren en la misma carpeta:
+```sh
+git clone https://github.com/SergioCopado/bdi-proyect1.git
+cd bdi-proyect1/parte_2
+```
+### 2. Construir la Imagen Docker
+Ejecute el siguiente comando para construir la imagen Docker basada en el Dockerfile proporcionado. Aquí extractor es el nombre de la imagen que se creará:
+```sh
+docker build -t extractor .
+```
+
+### 3. Ejecutar Docker Compose
+Levante toda la infraestructura utilizando Docker Compose:
+```sh
+docker-compose up
+```
+
+### 4. Acceder a JupyterLab
+Una vez que los contenedores estén en funcionamiento, abra su navegador web y acceda a JupyterLab en la siguiente URL:
+```sh
+http://localhost:8889
+```
+
+### 5. Ejecutar el Cuaderno de Jupyter
+En JupyterLab, abra el cuaderno procesamiento_almacenamiento_queries.ipynb. Luego, ejecute las celdas del cuaderno para procesar los datos con Spark y almacenarlos en Elasticsearch.
+
+### 6. Realizar Consultas en Elasticsearch
+Después de procesar y almacenar los datos, puede realizar algunas consultas en Elasticsearch como se indica en el cuaderno. 
