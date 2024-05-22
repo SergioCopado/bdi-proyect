@@ -168,4 +168,4 @@ http://localhost:8889
 En JupyterLab, abra el cuaderno procesamiento_almacenamiento_queries.ipynb. Luego, ejecute las celdas del cuaderno para procesar los datos con Spark y almacenarlos en Elasticsearch.
 
 ### 6. Realizar Consultas en Elasticsearch
-Después de procesar y almacenar los datos, puede realizar algunas consultas en Elasticsearch como se indica en el cuaderno. 
+Después de procesar y almacenar los datos, puede realizar algunas consultas en Elasticsearch que se muestran en el cuaderno o hacer las suyas propias si le interesa conocer más información sobre los libros que ha almacenado. 
