@@ -117,7 +117,8 @@ Una vez que tenemos los datos en crudo descargados en el volumen compartido shar
 El primer paso del procesamiento será crear una sesión en Spark. De esta forma, podremos usar las operaciones pertinentes de este servicio para limpiar y gestionar nuestros datos. 
 
 Spark proporciona ventajas para el procesamiento, algunas de ellas son la velocidad con la que realiza las tareas, el procesamiento en memoria y un motor de ejecución optimizado. Además, aporta una gran flexibilidad puesto que Spark puede manejar una gran variedad de formatos de los datos (JSON, Parquet, CSV, …) y facilita la ejecución de consultas sobre Dataframes/Datasets. También cabe destacar el hecho de que permite distribuir el procesamiento de datos a través de múltiples nodos en un clúster lo que supone escalabilidad horizontal y permite manejar grandes volúmenes de datos de manera eficiente realizando operaciones de procesamiento en paralelo.
-A continuación, hemos obtenido los campos contenidos en los archivos json, así como los campos que son comunes en todos los archivos descargados. Los archivos contienen mucha información, pero el objetivo será quedarnos con aquella que pueda resultar interesante al usuario.
+
+A continuación, hemos obtenido todos los campos contenidos en los archivos json, así como los campos que son comunes en todos los archivos descargados. Los archivos contienen mucha información, pero el objetivo será quedarnos con aquella que pueda resultar interesante al usuario.
 Una vez que tenemos la sesión iniciada en Spark y sabemos cuáles son los campos comunes, seleccionamos los campos más relevantes de nuestros datos como el título del libro, el nombre del autor, el año de publicación, el idioma en el que está disponible, el género, así como número de páginas, el id de amazon en caso de querer comprarlo online y el promedio de votación (del 1 al 5). Estas características aportan información relevante para cada libro además de proporcionar información útil al usuario.
 Una vez que tenemos las características, eliminamos las filas que sean nulas completamente ya que no aportan valor y guardamos en nuestro volumen compartido el nuevo Dataframe ya procesado y listo para ser almacenado. 
 
@@ -127,7 +128,7 @@ En cuanto al almacenamiento, se ha utilizado Elasticsearch principalmente porque
 
 Para proceder al almacenamiento, se inicia un cliente de Elasticsearch y se cargan los datos guardados en la etapa de procesamiento. Partimos de un Dataframe de pandas, por lo que lo primero será convertir cada fila en un archivo json. Una vez tenemos el formato adecuado, insertamos los datos en el índice que vamos a utilizar. De esta forma, todos los archivos quedan almacenados en el servicio. 
 A partir de este momento, podemos realizar queries para obtener información útil y relevante sobre los documentos guardados. Por ejemplo, se puede sacar el número de documentos que hay por autor, buscar aquellos que estén bien valorados, buscar documentos en el que el título tenga una palabra determinada o buscar los libros disponibles en un idioma en concreto o con un año de publicación específico.
-Para este servicio, se define un volumen particular. Esto se debe a que en él vamos a guardar los datos finales a lo que el usuario podrá realizar consultas. De esta forma, garantizamos que los datos no se ven perjudicados por el resto de servicios y procesos que se estén realizando al mismo tiempo. 
+Para este servicio, se define un volumen particular en el que vamos a guardar los datos finales, a los que el usuario podrá realizar consultas. De esta forma, garantizamos que los datos no se ven perjudicados por el resto de servicios y procesos que se estén realizando al mismo tiempo. 
 
 **RECURSOS**
 
