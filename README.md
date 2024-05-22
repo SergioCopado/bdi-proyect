@@ -130,7 +130,7 @@ Para proceder al almacenamiento, se inicia un cliente de Elasticsearch y se carg
 A partir de este momento, podemos realizar queries para obtener información útil y relevante sobre los documentos guardados. Por ejemplo, se puede sacar el número de documentos que hay por autor, buscar aquellos que estén bien valorados, buscar documentos en el que el título tenga una palabra determinada o buscar los libros disponibles en un idioma en concreto o con un año de publicación específico.
 Para este servicio, se define un volumen particular en el que vamos a guardar los datos finales, a los que el usuario podrá realizar consultas. De esta forma, garantizamos que los datos no se ven perjudicados por el resto de servicios y procesos que se estén realizando al mismo tiempo. 
 
-**RECURSOS**
+**PLAN DE ESCALABILIDAD**
 
 En este despliegue, hemos utilizado un único Spark Worker para facilitar el despliegue, dados los recursos limitados de nuestras máquinas host. Además, el volumen de datos procesados en esta fase inicial no ha justificado la necesidad de múltiples Spark Workers.
 
