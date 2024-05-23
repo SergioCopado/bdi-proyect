@@ -109,31 +109,33 @@ La ejecución de data_extractor.py está limitada a dos minutos, debido a que si
 command: bash -c "timeout 2m python -u data_extractor.py"
 ```
 Si se quisiera realizar con todos los datos, simplemente habría que eliminar esta línea.
-Los datos se almacenan en el volumen shared-workspace, definido en el compose, de forma que son accesibles por el resto de los servicios que usaremos en el proceso.
+Los datos se almacenan en el volumen *shared-workspace*, definido en el compose, de forma que son accesibles por el resto de los servicios que usaremos en el proceso.
 
 **PROCESAMIENTO**
 
-Una vez que tenemos los datos en crudo descargados en el volumen compartido shared-workspace, necesitamos procesarlos. Este procesamiento se realizará con Spark a través del jupyter notebook definido como servicio. Para utilizar el notebook es necesario acceder al http://localhost:8889.
+Una vez tenemos los datos en crudo descargados en el volumen compartido *shared-workspace*, necesitamos procesarlos. Este procesamiento se realizará con Spark a través del jupyter notebook definido como servicio. Para utilizar el notebook es necesario acceder al http://localhost:8889.
 El primer paso del procesamiento será crear una sesión en Spark. De esta forma, podremos usar las operaciones pertinentes de este servicio para limpiar y gestionar nuestros datos. 
 
 Spark proporciona ventajas para el procesamiento, algunas de ellas son la velocidad con la que realiza las tareas, el procesamiento en memoria y un motor de ejecución optimizado. Además, aporta una gran flexibilidad puesto que Spark puede manejar una gran variedad de formatos de los datos (JSON, Parquet, CSV, …). También cabe destacar el hecho de que permite distribuir el procesamiento de datos a través de múltiples nodos en un clúster lo que supone escalabilidad horizontal y permite manejar grandes volúmenes de datos de manera eficiente realizando operaciones de procesamiento en paralelo.
 
 A continuación, hemos obtenido todos los campos contenidos en los archivos json, así como los campos que son comunes en todos los archivos descargados (campos_comunes.ipynb). Los archivos contienen mucha información, pero el objetivo será quedarnos con aquella que pueda resultar interesante al usuario.
-Una vez que tenemos la sesión iniciada en Spark y sabemos cuáles son los campos comunes, seleccionamos los campos más relevantes de nuestros datos como el título del libro, el nombre del autor, el año de publicación, el idioma en el que está disponible, el género, así como número de páginas, el id de amazon en caso de querer comprarlo online y el promedio de votación (del 1 al 5). Estas características aportan información relevante para cada libro además de proporcionar información útil al usuario.
-Una vez que tenemos las características, eliminamos las filas que sean nulas completamente ya que no aportan valor y guardamos en nuestro volumen compartido el nuevo Dataframe ya procesado y listo para ser almacenado. 
+Una vez que tenemos la sesión iniciada en Spark y sabemos cuáles son los campos comunes, seleccionamos los campos más relevantes de nuestros datos como el título del libro, el nombre del autor, el año de publicación, el idioma en el que está disponible, el género, así como el número de páginas, el id de amazon en caso de querer comprarlo online y el promedio de votación (del 1 al 5). Estas características aportan información relevante para cada libro además de proporcionar información útil al usuario.
+Una vez tenemos las características, eliminamos las filas que sean nulas completamente ya que no aportan valor y guardamos en nuestro volumen compartido el nuevo Dataframe ya procesado y listo para ser almacenado. 
 
 **ALMACENAMIENTO**
 
-En cuanto al almacenamiento, se ha utilizado Elasticsearch principalmente porque es compatible con esquemas de datos flexibles, lo que es útil para datos semiestructurados como archivos json, ya que los datos pueden ser indexados sin necesidad de definir previamente todos los campos y tipos. Además, en cuanto a la velocidad, Elasticsearch está diseñado para la búsqueda y consulta rápida de grandes volúmenes de datos, además de ser flexible soportando consultas complejas incluyendo búsquedas con filtros de campos específicos, agregaciones, etc.
+En cuanto al almacenamiento, se ha utilizado Elasticsearch principalmente porque es compatible con esquemas de datos flexibles, lo que es útil para datos semiestructurados como archivos json, ya que los datos pueden ser indexados sin necesidad de definir previamente todos los campos y tipos. Además, en cuanto a la velocidad, Elasticsearch está diseñado para la búsqueda y consulta rápida de grandes volúmenes de datos, soportando consultas complejas incluyendo búsquedas con filtros de campos específicos, agregaciones, etc.
 
 Para proceder al almacenamiento, se inicia un cliente de Elasticsearch y se cargan los datos guardados en la etapa de procesamiento. Partimos de un Dataframe de pandas, por lo que lo primero será convertir cada fila en un archivo json. Una vez tenemos el formato adecuado, insertamos los datos en el índice que vamos a utilizar. De esta forma, todos los archivos quedan almacenados en el servicio. 
 
-A partir de este momento, podemos realizar queries para obtener información útil y relevante sobre los documentos guardados. Por ejemplo, se puede sacar el número de documentos que hay por autor, buscar aquellos que estén bien valorados, buscar documentos en el que el título tenga una palabra determinada o buscar los libros disponibles en un idioma en concreto o con un año de publicación específico. Para este servicio, se define un volumen particular (*esdata*) en el que vamos a guardar los datos finales, a los que el usuario podrá realizar consultas. Esta decisión, influye en varios aspectos de la infraestructura. Elasticsearch es una base de datos que maneja grandes volúmenes de datos y requiere un acceso rápido y eficiente a su almacenamiento. Al dedicar un volumen específico para el servicio, se asegura que sus operaciones de lectura y escritura no se vean afectadas por otros servicios. Además, separar los datos en dos volúmenes permite un aislamiento claro entre los datos utilizados por diferentes servicios de forma que los datos finales sobre los que se realizarán las consultas están separados. Por último, facilita la escalabilidad, si Elasticsearch requiere más espacio de almacenamiento o rendimiento, se puede ajustar el volumen *esdata* sin afectar el volumen *shared-workspace* utilizado por otros servicios.
+A partir de este momento, podemos realizar queries para obtener información útil y relevante sobre los documentos guardados. Por ejemplo, se puede sacar el número de documentos que hay por autor, buscar aquellos que estén bien valorados, buscar documentos en los que el título tenga una palabra determinada o buscar los libros disponibles en un idioma en concreto o con un año de publicación específico. 
+
+Para este servicio, se define un volumen particular (*esdata*) en el que vamos a guardar los datos finales, a los que el usuario podrá realizar consultas. Esta decisión, influye en varios aspectos de la infraestructura. Elasticsearch es una base de datos que maneja grandes volúmenes de datos y requiere un acceso rápido y eficiente a su almacenamiento. Al dedicar un volumen específico para el servicio, se asegura que sus operaciones de lectura y escritura no se vean afectadas por otros servicios. Además, separar los datos en dos volúmenes permite un aislamiento claro entre los datos utilizados por los diferentes servicios de forma que los datos finales sobre los que se realizarán las consultas están separados. Por último, facilita la escalabilidad, si Elasticsearch requiere más espacio de almacenamiento o rendimiento, se puede ajustar el volumen *esdata* sin afectar el volumen *shared-workspace* utilizado por el resto de servicios.
 
 
 **PLAN DE ESCALABILIDAD**
 
-En este despliegue, hemos utilizado un único Spark Worker para facilitar el despliegue, dados los recursos limitados de nuestras máquinas host. Además, el volumen de datos procesados en esta fase inicial no ha justificado la necesidad de múltiples Spark Workers.
+En este despliegue, hemos utilizado un único Spark Worker para facilitar el proceso dados los recursos limitados de nuestras máquinas host. Además, el volumen de datos procesados en esta fase inicial no ha justificado la necesidad de múltiples Spark Workers.
 
 Sin embargo, Spark permite una escalabilidad horizontal sencilla. En caso de un aumento en el volumen de datos o la necesidad de mejorar el rendimiento, se pueden añadir más Spark Workers. Esto permitiría distribuir las tareas de procesamiento en múltiples nodos, aprovechando al máximo las capacidades de procesamiento distribuido de Spark y mejorando la eficiencia general del sistema.
 
@@ -170,10 +172,10 @@ http://localhost:8889
 NOTA: Si apareciera un mensaje de que Jupyter Notebook no responde, se debe a que está cargando todos los datos y tarda un poco. Pulsar el botón *Keep Waiting*.
 
 ### 5. Subir los archivos .ipynb
-Una vez abierto el puerto 8889, debe cargar los archivos desde su equipo en el jupyterLab. Se recomienda subir los archivos en la carpeta *datain* para facilitar su ubicación. 
+Una vez abierto el puerto 8889, debe cargar los archivos *procesamiento_almacenamiento_queries.ipynb* y *campos_comunes.ipynb* desde su equipo en el JupyterLab. Se recomienda subir los archivos en la carpeta *datain* para facilitar su ubicación. 
 
 ### 6. Ejecutar el Cuaderno de Jupyter
-En JupyterLab, abra el cuaderno procesamiento_almacenamiento_queries.ipynb. Luego, ejecute las celdas del cuaderno para procesar los datos con Spark y almacenarlos en Elasticsearch.
+En JupyterLab, abra el cuaderno *procesamiento_almacenamiento_queries.ipynb*. Luego, ejecute las celdas del cuaderno para procesar los datos con Spark y almacenarlos en Elasticsearch.
 
 ### 7. Realizar Consultas en Elasticsearch
-Después de procesar y almacenar los datos, puede realizar algunas consultas en Elasticsearch que se muestran en el cuaderno o hacer las suyas propias si le interesa conocer más información sobre los libros que ha almacenado. 
+Después de procesar y almacenar los datos, puede realizar algunas consultas en Elasticsearch que se muestran en el cuaderno o hacer las suyas propias si le interesa conocer más información sobre los libros que se han almacenado. 
