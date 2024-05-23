@@ -146,7 +146,7 @@ Descargue el repositorio de GitHub y asegúrese de que todos los archivos se enc
 git clone https://github.com/SergioCopado/bdi-proyect.git
 ```
 ```sh
-cd bdi-proyect1/parte_2
+cd bdi-proyect/parte_2
 ```
 
 ### 2. Construir la Imagen Docker
