@@ -144,8 +144,11 @@ De manera similar, hemos desplegado un único nodo de Elasticsearch, tal y como 
 Descargue el repositorio de GitHub y asegúrese de que todos los archivos se encuentren en la misma carpeta:
 ```sh
 git clone https://github.com/SergioCopado/bdi-proyect1.git
+```
+```sh
 cd bdi-proyect1/parte_2
 ```
+
 ### 2. Construir la Imagen Docker
 Ejecute el siguiente comando para construir la imagen Docker basada en el Dockerfile proporcionado. Aquí *extractor* es el nombre de la imagen que se creará:
 ```sh
