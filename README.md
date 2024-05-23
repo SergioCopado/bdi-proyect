@@ -169,7 +169,7 @@ http://localhost:8889
 NOTA: Si apareciera un mensaje de que Jupyter Notebook no responde, se debe a que está cargando todos los datos y tarda un poco. Pulsar el botón *Keep Waiting*.
 
 ### 5. Subir los archivos .ipynb
-Una vez abierto el puerto 8889, debe cargar los archivos desde su equipo en el jupyterLab. Se recomienda crear una carpeta *archivos* para facilitar su ubicación. 
+Una vez abierto el puerto 8889, debe cargar los archivos desde su equipo en el jupyterLab. Se recomienda subir los archivos en la carpeta *datain* para facilitar su ubicación. 
 
 ### 6. Ejecutar el Cuaderno de Jupyter
 En JupyterLab, abra el cuaderno procesamiento_almacenamiento_queries.ipynb. Luego, ejecute las celdas del cuaderno para procesar los datos con Spark y almacenarlos en Elasticsearch.
