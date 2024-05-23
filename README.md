@@ -68,7 +68,7 @@ Esta guía proporciona los pasos necesarios para desplegar la infraestructura de
 
 1. **Descargar el repositorio de GitHub y asegurarse de que todos los archivos se encuentran en la misma carpeta:**
     ```bash
-   git clone https://github.com/SergioCopado/bdi-proyect1.git
+   git clone https://github.com/SergioCopado/bdi-proyect.git
    ```
     
 2. **Abrir la Terminal:**
@@ -143,7 +143,7 @@ De manera similar, hemos desplegado un único nodo de Elasticsearch, tal y como 
 ### 1. Clonar el Repositorio
 Descargue el repositorio de GitHub y asegúrese de que todos los archivos se encuentren en la misma carpeta:
 ```sh
-git clone https://github.com/SergioCopado/bdi-proyect1.git
+git clone https://github.com/SergioCopado/bdi-proyect.git
 ```
 ```sh
 cd bdi-proyect1/parte_2
