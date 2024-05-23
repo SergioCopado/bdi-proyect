@@ -1,1 +1,1 @@
-https://github.com/SergioCopado/bdi-proyect
+https://github.com/SergioCopado/bdi-proyect.git
