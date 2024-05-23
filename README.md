@@ -74,7 +74,7 @@ Esta guía proporciona los pasos necesarios para desplegar la infraestructura de
 2. **Abrir la Terminal:**
    Abra la terminal o línea de comandos en el sistema operativo correspondiente. Acceda en la terminal a la carpeta donde se han guardado los documentos descargados.
    ```bash
-   cd bdi-proyect1/parte_1
+   cd bdi-proyect/parte_1
    ```
 
 4. **Construir la Imagen Docker:**
