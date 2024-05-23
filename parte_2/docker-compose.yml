@@ -6,6 +6,7 @@ volumes:
       type: none
       o: bind
       device: ./data
+    name: data-volume
 
   esdata:
     driver: local
