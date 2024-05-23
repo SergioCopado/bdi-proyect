@@ -113,7 +113,7 @@ Los datos se almacenan en el volumen shared-workspace, definido en el compose, d
 
 **PROCESAMIENTO**
 
-Una vez que tenemos los datos en crudo descargados en el volumen compartido shared-workspace, necesitamos procesarlos. Este procesamiento se realizará con Spark a través del jupyter notebook definido como servicio. Para utilizar el notebook es necesario acceder al http://localhost:8889
+Una vez que tenemos los datos en crudo descargados en el volumen compartido shared-workspace, necesitamos procesarlos. Este procesamiento se realizará con Spark a través del jupyter notebook definido como servicio. Para utilizar el notebook es necesario acceder al http://localhost:8889.
 El primer paso del procesamiento será crear una sesión en Spark. De esta forma, podremos usar las operaciones pertinentes de este servicio para limpiar y gestionar nuestros datos. 
 
 Spark proporciona ventajas para el procesamiento, algunas de ellas son la velocidad con la que realiza las tareas, el procesamiento en memoria y un motor de ejecución optimizado. Además, aporta una gran flexibilidad puesto que Spark puede manejar una gran variedad de formatos de los datos (JSON, Parquet, CSV, …) y facilita la ejecución de consultas sobre Dataframes/Datasets. También cabe destacar el hecho de que permite distribuir el procesamiento de datos a través de múltiples nodos en un clúster lo que supone escalabilidad horizontal y permite manejar grandes volúmenes de datos de manera eficiente realizando operaciones de procesamiento en paralelo.
@@ -147,7 +147,7 @@ git clone https://github.com/SergioCopado/bdi-proyect1.git
 cd bdi-proyect1/parte_2
 ```
 ### 2. Construir la Imagen Docker
-Ejecute el siguiente comando para construir la imagen Docker basada en el Dockerfile proporcionado. Aquí extractor es el nombre de la imagen que se creará:
+Ejecute el siguiente comando para construir la imagen Docker basada en el Dockerfile proporcionado. Aquí *extractor* es el nombre de la imagen que se creará:
 ```sh
 docker build -t extractor .
 ```
@@ -163,9 +163,13 @@ Una vez que los contenedores estén en funcionamiento, abra su navegador web y a
 ```sh
 http://localhost:8889
 ```
+NOTA: Si apareciera un mensaje de que Jupyter Notebook no responde, se debe a que está cargando todos los datos y tarda un poco. Pulsar el botón *Keep Waiting*.
 
-### 5. Ejecutar el Cuaderno de Jupyter
+### 5. Subir los archivos .ipynb
+Una vez abierto el puerto 8889, debe cargar los archivos desde su equipo en el jupyterLab. Se recomienda crear una carpeta *archivos* para facilitar su ubicación. 
+
+### 6. Ejecutar el Cuaderno de Jupyter
 En JupyterLab, abra el cuaderno procesamiento_almacenamiento_queries.ipynb. Luego, ejecute las celdas del cuaderno para procesar los datos con Spark y almacenarlos en Elasticsearch.
 
-### 6. Realizar Consultas en Elasticsearch
+### 7. Realizar Consultas en Elasticsearch
 Después de procesar y almacenar los datos, puede realizar algunas consultas en Elasticsearch que se muestran en el cuaderno o hacer las suyas propias si le interesa conocer más información sobre los libros que ha almacenado. 
